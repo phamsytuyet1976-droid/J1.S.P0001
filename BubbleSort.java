@@ -1,31 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author -MSI-
- */
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    // Hàm nhập số nguyên dương (để thỏa mãn yêu cầu số 1 của đề)
+    public static int checkInput() {
         Scanner sc = new Scanner(System.in);
-        Random rd = new Random();
+        while (true) {
+            try {
+                int n = Integer.parseInt(sc.nextLine().trim());
+                if (n > 0) return n;
+                System.out.print("Please enter a positive number: ");
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input, please enter a number: ");
+            }
+        }
+    }
 
-        // 1. Nhập số lượng (viết gọn)
+    public static void main(String[] args) {
         System.out.print("Enter number of array: ");
-        int n = sc.nextInt(); 
-        
-        // 2. Tạo mảng và random giá trị
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) a[i] = rd.nextInt(100);
+        int n = checkInput(); // Dùng hàm check để không bị crash
 
-        // 3. In mảng lúc chưa sắp xếp
+        int[] a = new int[n];
+        Random rd = new Random();
+        for (int i = 0; i < n; i++) {
+            a[i] = rd.nextInt(100);
+        }
+
         System.out.println("Unsorted array: " + Arrays.toString(a));
 
-        // 4. Thuật toán Bubble Sort tối giản
+        // Bubble Sort
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (a[j] > a[j + 1]) {
@@ -36,7 +38,6 @@ public class Main {
             }
         }
 
-        // 5. In kết quả cuối cùng
         System.out.println("Sorted array: " + Arrays.toString(a));
     }
 }
